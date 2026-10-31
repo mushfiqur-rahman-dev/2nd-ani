@@ -1,0 +1,363 @@
+/* ==========================================================================
+   INTERACTIVE CHAPTERS: SPIN WHEEL & LOVE TEST (BURGUNDY & GOLD SCRAPBOOK)
+   ========================================================================== */
+
+/* Wheel Experience Layout */
+.wheel-experience {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: 60px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.wheel-copy {
+  max-width: 360px;
+}
+
+.interactive-label {
+  display: block;
+  margin-bottom: 14px;
+  color: #8c1a2e;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.wheel-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 420px;
+}
+
+.wheel-pointer {
+  position: absolute;
+  z-index: 4;
+  top: 10px;
+  color: #c41830;
+  font-size: 32px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+  transform: rotate(180deg);
+}
+
+.wheel {
+  position: relative;
+  width: min(78vw, 370px);
+  aspect-ratio: 1;
+  border: 12px solid #360710;
+  border-radius: 50%;
+  background: conic-gradient(
+    #821422 0 16.66%,
+    #fdf8ee 16.66% 33.33%,
+    #5a0b17 33.33% 50%,
+    #fbf2e0 50% 66.66%,
+    #821422 66.66% 83.33%,
+    #fdf8ee 83.33% 100%
+  );
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 2px rgba(248, 223, 176, 0.4);
+  transition: transform 2200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wheel-slice {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  transform-origin: center;
+}
+
+.wheel-slice-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-top: 18px;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.45);
+}
+
+.wheel-slice-num.num-on-red {
+  background: #fdf8ee;
+  color: #5a0b17;
+  border: 1.5px solid #e9c488;
+}
+
+.wheel-slice-num.num-on-cream {
+  background: #5a0b17;
+  color: #fdf8ee;
+  border: 1.5px solid #fdf8ee;
+}
+
+.wheel-center {
+  position: absolute;
+  inset: 34%;
+  display: grid;
+  place-content: center;
+  border: 5px solid rgba(248, 223, 176, 0.8);
+  border-radius: 50%;
+  background: #360710;
+  color: #f8dfb0;
+  font-family: var(--font-script);
+  font-size: 26px;
+  line-height: 0.9;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.wheel-center small {
+  margin-top: 6px;
+  color: #ff5268;
+  font-family: var(--font-serif);
+  font-size: 14px;
+}
+
+.wheel-spin-button {
+  position: absolute;
+  bottom: 10px;
+  padding: 13px 28px;
+  border: 1px solid var(--gold-script);
+  border-radius: 999px;
+  color: #fff;
+  background: #6d101e;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1), background 300ms ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.wheel-spin-button:hover {
+  transform: scale(1.06) translateY(-2px);
+  background: #8c1a2e;
+}
+
+.wheel-result {
+  max-width: 440px;
+  min-height: 95px;
+  margin: 30px auto 0;
+  padding: 22px;
+  border-top: 1px solid rgba(180, 165, 145, 0.4);
+  text-align: center;
+  opacity: 0.5;
+  transform: translateY(10px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.wheel-result.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wheel-result span {
+  display: block;
+  margin-bottom: 8px;
+  color: #8c1a2e;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.wheel-result strong {
+  color: #360710;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   LOVE TEST QUIZ
+   ========================================================================== */
+
+.love-test {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: 70px;
+}
+
+.test-heading {
+  max-width: 360px;
+}
+
+.test-card {
+  min-height: 460px;
+  padding: 38px 32px;
+  border-radius: 12px;
+  background: #32060e;
+  border: 1px solid rgba(248, 223, 176, 0.25);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+}
+
+.test-meta {
+  display: flex;
+  justify-content: space-between;
+  color: var(--cream-muted);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.test-progress {
+  height: 4px;
+  margin: 18px 0 42px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.test-progress span {
+  display: block;
+  height: 100%;
+  background: var(--gold-script);
+  transform-origin: left;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.test-card h3 {
+  margin-bottom: 26px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.8vw, 2.4rem);
+  line-height: 1.15;
+  color: var(--cream-text);
+}
+
+.answer-list {
+  display: grid;
+  gap: 12px;
+}
+
+.answer {
+  display: grid;
+  grid-template-columns: 32px 1fr 26px;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(248, 223, 176, 0.2);
+  border-radius: 8px;
+  color: var(--cream-text);
+  background: #440915;
+  cursor: pointer;
+  text-align: left;
+  transition: all 300ms ease;
+}
+
+.answer:hover {
+  transform: translateX(6px);
+  border-color: var(--gold-script);
+  background: #550c1a;
+}
+
+.answer > span {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--gold-script);
+  background: #250308;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.answer i {
+  color: var(--gold-script);
+  font-style: normal;
+  text-align: center;
+}
+
+.answer.is-correct {
+  border-color: var(--gold-script);
+  background: #60101e;
+  transform: translateX(8px);
+}
+
+.answer.is-wrong {
+  border-color: rgba(255, 80, 80, 0.5);
+  opacity: 0.65;
+}
+
+.test-result {
+  display: grid;
+  place-items: center;
+  min-height: 380px;
+  text-align: center;
+}
+
+.result-heart {
+  color: #ff334b;
+  font-size: 54px;
+  animation: heart-beat-pulse 2.2s ease-in-out infinite;
+}
+
+.test-result strong {
+  display: block;
+  color: var(--gold-script);
+  font-family: var(--font-script);
+  font-size: 68px;
+  line-height: 1;
+}
+
+.test-result h3 {
+  margin: 18px 0 10px;
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: var(--cream-text);
+}
+
+.test-result p {
+  max-width: 320px;
+  color: var(--cream-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.test-result .button {
+  margin-top: 18px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: #7b1222;
+  color: #fff;
+  border: 1px solid rgba(248, 223, 176, 0.4);
+  cursor: pointer;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: all 300ms ease;
+}
+
+.test-result .button:hover {
+  background: #9f1528;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .wheel-experience,
+  .love-test {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .wheel-copy,
+  .test-heading {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .test-card {
+    padding: 26px 18px;
+  }
+}
