@@ -6,8 +6,18 @@ import {
   type ReactNode,
 } from 'react'
 import { defaultStoryContent, type FullStoryData } from '../content'
+import customStoryContent from '../customContent.json'
 
 const STORAGE_KEY = 'two_years_one_love_custom_data_v1'
+
+const bundledStoryContent: FullStoryData = {
+  ...defaultStoryContent,
+  ...(customStoryContent as Partial<FullStoryData>),
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
 
 interface StoryContextType {
   storyData: FullStoryData
@@ -26,13 +36,15 @@ export function StoryProvider({ children }: { children: ReactNode }) {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
       if (saved) {
-        const parsed = JSON.parse(saved)
-        return { ...defaultStoryContent, ...parsed }
+        const parsed: unknown = JSON.parse(saved)
+        if (isRecord(parsed)) {
+          return { ...bundledStoryContent, ...parsed }
+        }
       }
     } catch {
-      // Ignore parse errors and use default
+      // Ignore parse errors and use bundled project content
     }
-    return defaultStoryContent
+    return bundledStoryContent
   })
 
   const [isAdminOpen, setIsAdminOpen] = useState(false)
@@ -97,7 +109,7 @@ export function StoryProvider({ children }: { children: ReactNode }) {
 
   const resetToDefault = () => {
     localStorage.removeItem(STORAGE_KEY)
-    setStoryData(defaultStoryContent)
+    setStoryData(bundledStoryContent)
   }
 
   return (
